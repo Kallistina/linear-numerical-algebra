@@ -1,6 +1,6 @@
 # Linear Numerical Algebra Project
 
-This repository contains the implementations of algorithms for the course **Επιστημονικοί Υπολογισμοί (Αριθμητική Γραμμική Άλγεβρα)**, part of the **ΘΠ03** program.
+This repository contains the implementations of algorithms for the course **Επιστημονικοί Υπολογισμοί (Αριθμητική Γραμμική Άλγεβρα, ΘΠ03)**.
 
 ## Course Overview
 
