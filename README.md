@@ -6,62 +6,105 @@ This repository contains the implementations of algorithms for the course **Επ
 
 This course focuses on numerical methods in scientific computing, with a particular emphasis on linear algebra operations such as matrix decompositions, solving systems of equations, and eigenvalue problems. The projects in this repository demonstrate the application of various algorithms in these areas.
 
-## Projects
+## Projects Overview
 
 ### Project 1: Cholesky Decomposition & LU Decomposition
-- **Cholesky Decomposition**: This project implements the Cholesky factorization algorithm, which decomposes a positive-definite matrix into a lower triangular matrix and its conjugate transpose.
-- **LU Decomposition**: Implements the LU decomposition, where a matrix is factored into the product of a lower triangular matrix and an upper triangular matrix. This is often used for solving systems of linear equations.
+- **Cholesky Decomposition**: This project implements the Cholesky factorization algorithm, which decomposes a symmetric positive-definite matrix into the product of a lower triangular matrix and its transpose.
+- **LU Decomposition**: Implements LU decomposition, where a square matrix is factored into a lower triangular matrix and an upper triangular matrix.
 
 ### Project 2: ESOR, PSD, and OM Methods
 - **ESOR (Explicit Successive Over-Relaxation)**: Implements the ESOR method for solving linear systems, optimizing the iteration process using over-relaxation.
-- **PSD (Positive Semi-Definite)**: Implements the algorithm for checking and ensuring that matrices are positive semi-definite, a critical condition in many optimization and machine learning algorithms.
+- **PSD (Positive Semi-Definite)**: Implements the algorithm to check and ensure that matrices are positive semi-definite.
+- **OM (Orthogonalization Method)**: Implements an orthogonalization method for solving systems of linear equations, producing orthonormal sets of vectors.
 
 ### Project 3: QR Decomposition using Householder Transformations
-- Implements the QR decomposition algorithm using Householder reflections, which is used to factor a matrix into an orthogonal matrix (Q) and an upper triangular matrix (R).
+- Implements QR decomposition using Householder reflections, which decomposes a matrix into an orthogonal matrix (Q) and an upper triangular matrix (R).
 
-## Installation
+## Makefile and Running the Project
 
-To compile and run the projects, make sure you have a C++ compiler installed (e.g., `g++`).
+### Compilation and Execution
 
-1. Clone the repository:
+Use the following commands to compile and run the projects. The Makefile provided helps you automate the build process.
+
+1. **Compilation**:
     ```bash
-    git clone https://github.com/your-username/your-repo-name.git
-    ```
-2. Navigate to the project directory:
-    ```bash
-    cd your-repo-name
+    make all
     ```
 
-3. Compile the source files:
-    ```bash
-    g++ -o run main.cpp cholesky.cpp lu_decomposition.cpp esor.cpp psd.cpp qr_house.cpp
-    ```
+    This will compile all the necessary executables for the algorithms:
+    - `cholesky`
+    - `cholesky_inv`
+    - `lu`
+    - `lu_inv`
 
-4. Run the program with appropriate arguments for each project. Example:
-    ```bash
-    ./run <project_number> <additional_arguments>
-    ```
+2. **Running the Projects**:
 
-## Project Descriptions
+    - **Cholesky Decomposition**:
+      ```bash
+      make runCholesky
+      ```
+      This runs the Cholesky decomposition for a 4x4 matrix.
 
-### Cholesky Decomposition
-- **Input**: A symmetric positive-definite matrix.
-- **Output**: A lower triangular matrix `L` such that `A = L * L^T`.
+    - **Inverse of Cholesky**:
+      ```bash
+      make runCholesky_inv
+      ```
+      This runs the inverse calculation of Cholesky decomposition for a 5x5 matrix.
 
-### LU Decomposition
-- **Input**: A square matrix.
-- **Output**: Two matrices `L` and `U` such that `A = L * U`.
+    - **LU Decomposition**:
+      ```bash
+      make runLU
+      ```
+      This runs the LU decomposition for a 5x5 matrix.
 
-### ESOR Method
-- **Input**: A matrix and initial guess for the solution vector.
-- **Output**: The solution to the linear system after iterative refinement.
+    - **Inverse of LU**:
+      ```bash
+      make runLU_inv
+      ```
+      This runs the inverse calculation of LU decomposition for a 4x4 matrix.
 
-### PSD Check
-- **Input**: A matrix.
-- **Output**: A boolean indicating whether the matrix is positive semi-definite.
+### Makefile Example
 
-### QR Decomposition (Householder)
-- **Input**: A matrix `A`.
-- **Output**: Matrices `Q` (orthogonal) and `R` (upper triangular) such that `A = Q * R`.
+Here’s an example of the **Makefile** that compiles and runs the various parts of the project:
+
+```makefile
+# Makefile for Cholesky and LU decomposition projects
+
+# Compiler
+CC = gcc
+CFLAGS = -lm  # Link math library for certain functions (like sqrt)
+
+# Output executables
+EXECUTABLES = cholesky cholesky_inv lu lu_inv
+
+# All targets
+all: $(EXECUTABLES)
+
+# Compile Cholesky and its inverse
+cholesky: cholesky.c
+	$(CC) -o cholesky cholesky.c $(CFLAGS)
+
+cholesky_inv: cholesky_inv.c
+	$(CC) -o cholesky_inv cholesky_inv.c $(CFLAGS)
+
+# Compile LU decomposition and its inverse
+lu: lu.c
+	$(CC) -o lu lu.c $(CFLAGS)
+
+lu_inv: lu_inv.c
+	$(CC) -o lu_inv lu_inv.c $(CFLAGS)
+
+# Running targets
+runCholesky:
+	./cholesky 4
+
+runCholesky_inv:
+	./cholesky_inv 5
+
+runLU:
+	./lu 5
+
+runLU_inv:
+	./lu_inv 4
 
 
